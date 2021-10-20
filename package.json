@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "engines": {
+    "node": "16.11.1",
     "yarn": "1.22.17"
   },
   "scripts": {
