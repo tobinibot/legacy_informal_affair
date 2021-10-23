@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @items = Item.all.order(Arel.sql('"Item Number"'))
+    @items = Item.includes(:donor, :sale).order(Arel.sql('"Item Number"'))
   end
 end
