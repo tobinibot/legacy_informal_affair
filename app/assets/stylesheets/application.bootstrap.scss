@@ -1,1 +1,59 @@
 @import 'bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.navbar-brand {
+  font-weight: 900;
+}
+
+.nav-item {
+  font-weight: 600;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(140deg, rgb(30, 227, 254), rgb(251,0,246));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-secondary,
+.icon-gradient-secondary:before {
+  background: linear-gradient(140deg, rgb(35, 255, 6), rgb(12, 99, 255));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-tertiary,
+.icon-gradient-tertiary:before {
+  background: linear-gradient(70deg, rgb(251, 0, 207), rgb(255, 255, 11));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.icon-gradient-grey:before {
+  background: linear-gradient(120deg, rgb(154, 153, 153), rgb(91, 91, 91));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-sm {
+  font-size: 0.8em;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+.donor {
+  background: linear-gradient(90deg, #974243, #6c3030);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

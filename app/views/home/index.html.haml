@@ -1,5 +1,47 @@
-%h1 Home
+.row.mt-3.mb-3
+  .col
+    %h1 2019 Items
 
-%p
-  The current time is
-  %span.text-primary= Time.now
+.row
+  .col
+    .alert.alert-primary{role: 'alert'}
+      An
+      %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
+      in the
+      %span.text-sm.text-capitalize SOLD
+      column means the gift card was not actually for sale, but was probably part of some game or giveaway.
+
+.row.mb-5
+  .col
+    %table.table.table-striped.align-top
+      %thead
+        %tr.text-sm.text-uppercase
+          %th
+          %th Title
+          %th GC
+          %th Value
+          %th Sold
+          %th Description
+
+      %tbody
+        - @items.each do |item|
+          %tr
+            %td.text-muted= item.id
+            %td.text-nowrap= item.title
+            %td
+              - if item.IsGiftCertificate == 1
+                %i.bi.bi-check-circle-fill.icon-gradient-secondary.text-sm
+            %td
+              - if item.Value == 0
+                ∞
+              - else
+                = number_to_currency(item.Value)
+            %td
+              - if item.InGiftCardTree == 1
+                %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
+              - else
+                = number_to_currency(item.winning_bid)
+            %td.text-sm
+              .div
+                %span.donor.text-uppercase= item.donor&.name
+              = item.description
