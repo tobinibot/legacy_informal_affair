@@ -44,6 +44,10 @@ body {
   white-space: nowrap;
 }
 
+.text-strong {
+  font-weight: bold;
+}
+
 .text-sm {
   font-size: 0.8em;
 }
@@ -53,7 +57,7 @@ h1 {
 }
 
 .donor {
-  background: linear-gradient(90deg, #974243, #6c3030);
+  background: linear-gradient(90deg, #974243, #d35052);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
