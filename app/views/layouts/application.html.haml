@@ -24,11 +24,9 @@
         #navbarSupportedContent.collapse.navbar-collapse
           %ul.navbar-nav.me-auto.mb-2.mb-lg-0
             %li.nav-item
-              %a.nav-link.active{"aria-current" => "page", :href => "/"} 2019
+              %a.nav-link{"aria-current" => "page", :href => "/", class: class_names(active: current_page?(action: 'items_2019'))} 2019
             %li.nav-item
-              %a.nav-link.disabled{:href => "/2018"} 2018
-            %li.nav-item
-              %a.nav-link.disabled{:href => "/2017"} 2017
+              %a.nav-link{:href => "/2018", class: class_names(active: current_page?(action: 'items_2018'))} 2018
 
     .container-fluid
       = yield

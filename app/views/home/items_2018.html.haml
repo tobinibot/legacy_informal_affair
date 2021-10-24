@@ -1,0 +1,63 @@
+.row.mt-3.mb-3
+  .col
+    %h1 2018 Items
+
+.row.mt-3.mb-3
+  .col
+    .alert.alert-primary{role: 'alert'}
+      We don’t have sale data for 2018 (at least, I don’t know where it is) ¯\_(ツ)_/¯
+
+.row.mb-3
+  .col-sm-6.col-md-4
+    %input.form-control#search{type: "search", placeholder: 'Search…'}
+
+-#.row.mb-3
+  .col-sm-12
+    .form-check
+      %input.form-check-input#only-gc{type: "checkbox"}
+      %label.form-check-label{for: "only-gc"}
+        Only show gift cards
+
+-#.row
+  .col-sm-12
+    .form-check-inline
+      %input.form-check-input#status-all{type: "radio", name: 'status', value: 'all', checked: true}
+      %label.form-check-label{for: "status-all"} Show all items
+    .form-check-inline
+      %input.form-check-input#status-sold{type: "radio", name: 'status', value: 'sold'}
+      %label.form-check-label{for: "status-sold"} Show only sold items
+    .form-check-inline
+      %input.form-check-input#status-unsold{type: "radio", name: 'status', value: 'unsold'}
+      %label.form-check-label{for: "status-unsold"} Show only unsold items
+
+.row
+  .col
+    %table.table.table-striped.align-top#item-table
+      %thead
+        %tr.text-sm.text-uppercase
+          %th
+          %th Title
+          %th GC
+          %th Value
+          %th Description
+
+      %tbody
+        - @items.each do |item|
+          %tr
+            %td.text-muted= item.id
+            %td.text-nowrap= item.title
+            %td
+              - if item.IsGiftCertificate == 1
+                %i.bi.bi-check-circle-fill.icon-gradient-secondary.text-sm
+            %td
+              - if item.Value == 0
+                ∞
+              - else
+                = number_to_currency(item.Value)
+            %td.text-sm
+              .div
+                %span.donor
+                  %span.text-uppercase{style: 'font-weight: 600;'}= item.donor&.name
+                  %span= item.donor&.contact
+
+              = item.description

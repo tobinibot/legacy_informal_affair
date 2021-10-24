@@ -5,12 +5,28 @@ import "controllers"
 
 console.log('Ran application.js')
 
-const tableRows = document.getElementById('item-table').querySelectorAll('tbody tr');
-const searchField = document.getElementById('search');
-const onlyGiftCardsCheckbox = document.getElementById('only-gc');
-const statusRadioButtons = document.querySelectorAll('input[name="status"]');
+
+
+document.addEventListener("turbo:load", function() {
+    console.log('turbo:load');
+    // let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    // tooltipTriggerList.map(function (tooltipTriggerEl) {
+    //     return new bootstrap.Tooltip(tooltipTriggerEl)
+    // });
+
+    document.getElementById('search').addEventListener('keyup', function (e) {
+        filter();
+    });
+
+});
 
 function filter() {
+    const tableRows = document.getElementById('item-table').querySelectorAll('tbody tr');
+    const searchField = document.getElementById('search');
+    const onlyGiftCardsCheckbox = document.getElementById('only-gc');
+    const statusRadioButtons = document.querySelectorAll('input[name="status"]');
+
+
     const query = searchField.value.trim().toLowerCase().replaceAll(/\s+/g, ' ');
     // const onlyGiftCards = onlyGiftCardsCheckbox.checked;
 
@@ -33,9 +49,6 @@ function filter() {
     }
 }
 
-searchField.addEventListener('keyup', function (e) {
-    filter();
-});
 
 // onlyGiftCardsCheckbox.addEventListener('change', function (e) {
 //     filter();

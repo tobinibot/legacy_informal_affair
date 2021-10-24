@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  root 'home#index'
-
-  get 'home/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  # Almost every application defines a route for the root path ("/") at the top of this file.
-  # root "articles#index"
+  root 'home#items_2019'
+
+  get '2019' => 'home#items_2019', as: 'items_2019'
+  get '2018' => 'home#items_2018', as: 'items_2018'
 end
