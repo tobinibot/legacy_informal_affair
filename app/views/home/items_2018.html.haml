@@ -37,7 +37,6 @@
         %tr.text-sm.text-uppercase
           %th
           %th Title
-          %th GC
           %th Value
           %th Description
 
@@ -46,9 +45,6 @@
           %tr
             %td.text-muted= item.id
             %td.text-nowrap= item.title
-            %td
-              - if item.IsGiftCertificate == 1
-                %i.bi.bi-check-circle-fill.icon-gradient-secondary.text-sm
             %td
               - if item.Value == 0
                 ∞
