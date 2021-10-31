@@ -45,8 +45,15 @@ function filter() {
         } else {
             row.classList.add('d-none');
         }
-
     }
+
+    const visibleCounter = document.getElementById('visible-item-count');
+    const allCounter = document.getElementById('all-item-count');
+    const allRows = document.querySelectorAll('tbody tr').length;
+    const hiddenRows = document.querySelectorAll('tbody tr.d-none').length;
+
+    visibleCounter.innerText = allRows - hiddenRows;
+    allCounter.innerText = allRows;
 }
 
 

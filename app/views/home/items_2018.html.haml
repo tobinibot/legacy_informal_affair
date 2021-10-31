@@ -7,9 +7,17 @@
     .alert.alert-primary{role: 'alert'}
       We don’t have sale data for 2018 (at least, I don’t know where it is) ¯\_(ツ)_/¯
 
-.row.mb-3
+.row.mb-1
   .col-sm-6.col-md-4
     %input.form-control#search{type: "search", placeholder: 'Search…'}
+
+.row.mb-3
+  .col-sm-12.text-sm{style: 'font-weight: 300;'}
+    Showing
+    %span#visible-item-count= @items.count
+    out of
+    %span#all-item-count= @items.count
+    items
 
 -#.row.mb-3
   .col-sm-12
