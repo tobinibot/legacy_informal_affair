@@ -55,5 +55,7 @@
                 %span.donor
                   %span.text-uppercase{style: 'font-weight: 600;'}= item.donor&.name
                   %span= item.donor&.contact
+                %span.gatherer
+                  &larr; brought in by #{item.committee_contact&.CommitteeContactName}
 
               = item.description

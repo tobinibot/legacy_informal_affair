@@ -58,6 +58,8 @@ development:
 test:
   <<: *default
   database: legacy_informal_affair_test
+  username: root
+  host: 127.0.0.1
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
