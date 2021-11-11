@@ -2,11 +2,6 @@
   .col
     %h1 2018 Items
 
-.row.mt-3.mb-3
-  .col
-    .alert.alert-primary{role: 'alert'}
-      We don’t have sale data for 2018 (at least, I don’t know where it is) ¯\_(ツ)_/¯
-
 .row.mb-1
   .col-sm-6.col-md-4
     %input.form-control#search{type: "search", placeholder: 'Search…', disabled: true}
@@ -46,6 +41,7 @@
           %th
           %th Title
           %th Value
+          %th Sold
           %th Description
 
       %tbody
@@ -58,6 +54,7 @@
                 ∞
               - else
                 = number_to_currency(item.Value)
+            %td= number_to_currency(item.winning_bid)
             %td.text-sm
               .div
                 %span.donor
