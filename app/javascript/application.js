@@ -5,6 +5,10 @@ import "controllers"
 
 console.log('Ran application.js')
 
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+});
 
 
 document.addEventListener("turbo:load", function() {
@@ -38,11 +42,19 @@ function filter() {
     //     }
     // }
 
+    let itemsSold = 0
+    let totalSales = 0
+
     for (const row of tableRows) {
         const text = row.innerText.toLowerCase();
 
         if (text.indexOf(query) > -1) {
             row.classList.remove('d-none');
+            let value = parseFloat(row.dataset.soldFor);
+            totalSales += value
+            if (value > 0) {
+                itemsSold++;
+            }
         } else {
             row.classList.add('d-none');
         }
@@ -50,11 +62,15 @@ function filter() {
 
     const visibleCounter = document.getElementById('visible-item-count');
     const allCounter = document.getElementById('all-item-count');
+    const soldCounter = document.getElementById('sold-item-count');
+    const saleValue = document.getElementById('sale-value');
     const allRows = document.querySelectorAll('tbody tr').length;
     const hiddenRows = document.querySelectorAll('tbody tr.d-none').length;
 
     visibleCounter.innerText = allRows - hiddenRows;
     allCounter.innerText = allRows;
+    soldCounter.innerText = itemsSold;
+    saleValue.innerText = currencyFormatter.format(totalSales);
 }
 
 
