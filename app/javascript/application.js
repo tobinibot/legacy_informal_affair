@@ -10,6 +10,10 @@ const currencyFormatter = new Intl.NumberFormat('en-US', {
     currency: 'USD'
 });
 
+function init() {
+    let searchBox = document.getElementById('search')
+    searchBox.value = '';
+}
 
 document.addEventListener("turbo:load", function() {
     console.log('turbo:load');
@@ -22,8 +26,11 @@ document.addEventListener("turbo:load", function() {
     searchBox.addEventListener('input', function (e) {
         filter();
     });
-    searchBox.removeAttribute('disabled');
+
+    init()
 });
+
+init();
 
 function filter() {
     const tableRows = document.getElementById('item-table').querySelectorAll('tbody tr');
