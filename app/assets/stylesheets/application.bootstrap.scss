@@ -70,6 +70,13 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
+.category {
+  font-weight: 600;
+  background: linear-gradient(90deg, #119329, #15790d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 #visible-item-count, #all-item-count {
   font-weight: 500;
 }
