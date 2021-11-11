@@ -8,7 +8,7 @@
       An
       %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
       in the
-      %span.text-strong.text-sm.text-capitalize SOLD
+      %span.text-strong.text-sm.text-capitalize GC
       column means the gift card was not actually for sale, but was probably part of some game or giveaway.
 
 .row.mb-1
@@ -59,19 +59,17 @@
           %tr
             %td.text-muted= item.id
             %td.text-nowrap= item.title
-            %td
+            %td.text-nowrap
               - if item.IsGiftCertificate == 1
                 %i.bi.bi-credit-card-fill.icon-gradient-secondary.text-sm
+                - if item.InGiftCardTree == 1
+                  %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
             %td
               - if item.Value == 0
                 ∞
               - else
                 = number_to_currency(item.Value)
-            %td
-              - if item.InGiftCardTree == 1
-                %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
-              - else
-                = number_to_currency(item.winning_bid)
+            %td= number_to_currency(item.winning_bid)
             %td.text-sm
               .div
                 %span.donor
