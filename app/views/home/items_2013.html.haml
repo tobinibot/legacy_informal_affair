@@ -1,19 +1,20 @@
 .row.mt-3.mb-3
   .col
-    %h1 2019 Items
+    %h1 2013 Items
 
 .row.mt-3.mb-3
   .col
     .alert.alert-secondary{role: 'alert'}
-      %h4.text-sm.text-uppercase.text-muted Legend
+      %p
+        This year had no sales data.
+
+      %h4.text-sm.text-uppercase.text-muted.mb-0 Legend
 
       %div
         %i.bi.bi-credit-card-fill.icon-gradient-secondary.text-sm
         &bull;
         this is a gift card
-      %div
-        %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
-        &bull; this gift card was not for sale, but instead used in a gift card tree or game
+
 
 .row.mb-1
   .col-sm-6.col-md-4
@@ -25,29 +26,7 @@
     %span#visible-item-count= @items.count
     out of
     %span#all-item-count= @items.count
-    items &mdash;
-    %span#sold-item-count= @items.select{ |i| !i.winning_bid.nil? }.length
-    of them sold for
-    %span#sale-value= number_to_currency(@items.sum{ |i| i.winning_bid.nil? ? 0 : i.winning_bid })
-
--#.row.mb-3
-  .col-sm-12
-    .form-check
-      %input.form-check-input#only-gc{type: "checkbox"}
-      %label.form-check-label{for: "only-gc"}
-        Only show gift cards
-
--#.row
-  .col-sm-12
-    .form-check-inline
-      %input.form-check-input#status-all{type: "radio", name: 'status', value: 'all', checked: true}
-      %label.form-check-label{for: "status-all"} Show all items
-    .form-check-inline
-      %input.form-check-input#status-sold{type: "radio", name: 'status', value: 'sold'}
-      %label.form-check-label{for: "status-sold"} Show only sold items
-    .form-check-inline
-      %input.form-check-input#status-unsold{type: "radio", name: 'status', value: 'unsold'}
-      %label.form-check-label{for: "status-unsold"} Show only unsold items
+    items
 
 .row
   .col
@@ -56,27 +35,23 @@
         %tr.text-sm.text-uppercase
           %th
           %th Title
-          %th
+          %th GC
           %th Value
-          %th Sold
           %th Description
 
       %tbody
         - @items.each do |item|
-          %tr{'data-sold-for' => item.winning_bid.nil? ? 0 : item.winning_bid }
+          %tr
             %td.text-muted= item.id
             %td.text-nowrap= item.title
             %td.text-nowrap
               - if item.IsGiftCertificate == 1
                 %i.bi.bi-credit-card-fill.icon-gradient-secondary.text-sm
-                - if item.InGiftCardTree == 1
-                  %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
             %td
               - if item.Value == 0
                 ∞
               - else
                 = number_to_currency(item.Value)
-            %td= number_to_currency(item.winning_bid)
             %td.text-sm
               .div
                 %span.donor
@@ -91,6 +66,6 @@
                 %div
                   %span.category= "[#{category(item.CategoryID)}]"
 
-              - if item.TableID&.include?('Live')
+              - if item.TableID&.include?('LIVE')
                 %div
                   %span.category= "[Live Auction]"

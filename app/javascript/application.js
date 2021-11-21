@@ -38,6 +38,11 @@ function filter() {
     // const onlyGiftCardsCheckbox = document.getElementById('only-gc');
     // const statusRadioButtons = document.querySelectorAll('input[name="status"]');
 
+    const visibleCounter = document.getElementById('visible-item-count');
+    const allCounter = document.getElementById('all-item-count');
+    const soldCounter = document.getElementById('sold-item-count');
+    const saleValue = document.getElementById('sale-value');
+    const allRows = document.querySelectorAll('tbody tr').length;
 
     const query = searchField.value.trim().toLowerCase().replaceAll(/\s+/g, ' ');
     // const onlyGiftCards = onlyGiftCardsCheckbox.checked;
@@ -49,6 +54,8 @@ function filter() {
     //     }
     // }
 
+    const hasSalesData = (soldCounter !== null);
+
     let itemsSold = 0
     let totalSales = 0
 
@@ -57,27 +64,28 @@ function filter() {
 
         if (text.indexOf(query) > -1) {
             row.classList.remove('d-none');
-            let value = parseFloat(row.dataset.soldFor);
-            totalSales += value
-            if (value > 0) {
-                itemsSold++;
+
+            if (hasSalesData) {
+                let value = parseFloat(row.dataset.soldFor);
+                totalSales += value
+                if (value > 0) {
+                    itemsSold++;
+                }
             }
         } else {
             row.classList.add('d-none');
         }
     }
 
-    const visibleCounter = document.getElementById('visible-item-count');
-    const allCounter = document.getElementById('all-item-count');
-    const soldCounter = document.getElementById('sold-item-count');
-    const saleValue = document.getElementById('sale-value');
-    const allRows = document.querySelectorAll('tbody tr').length;
     const hiddenRows = document.querySelectorAll('tbody tr.d-none').length;
 
     visibleCounter.innerText = allRows - hiddenRows;
     allCounter.innerText = allRows;
-    soldCounter.innerText = itemsSold;
-    saleValue.innerText = currencyFormatter.format(totalSales);
+
+    if (hasSalesData) {
+        soldCounter.innerText = itemsSold;
+        saleValue.innerText = currencyFormatter.format(totalSales);
+    }
 }
 
 

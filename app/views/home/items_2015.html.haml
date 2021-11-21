@@ -1,6 +1,6 @@
 .row.mt-3.mb-3
   .col
-    %h1 2019 Items
+    %h1 2015 Items
 
 .row.mt-3.mb-3
   .col
@@ -14,6 +14,10 @@
       %div
         %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
         &bull; this gift card was not for sale, but instead used in a gift card tree or game
+      %div
+        %i.bi.bi-basket-fill.icon-gradient-basket.text-sm
+        &bull;
+        this item was part of a basket and not for sale individually
 
 .row.mb-1
   .col-sm-6.col-md-4
@@ -30,25 +34,6 @@
     of them sold for
     %span#sale-value= number_to_currency(@items.sum{ |i| i.winning_bid.nil? ? 0 : i.winning_bid })
 
--#.row.mb-3
-  .col-sm-12
-    .form-check
-      %input.form-check-input#only-gc{type: "checkbox"}
-      %label.form-check-label{for: "only-gc"}
-        Only show gift cards
-
--#.row
-  .col-sm-12
-    .form-check-inline
-      %input.form-check-input#status-all{type: "radio", name: 'status', value: 'all', checked: true}
-      %label.form-check-label{for: "status-all"} Show all items
-    .form-check-inline
-      %input.form-check-input#status-sold{type: "radio", name: 'status', value: 'sold'}
-      %label.form-check-label{for: "status-sold"} Show only sold items
-    .form-check-inline
-      %input.form-check-input#status-unsold{type: "radio", name: 'status', value: 'unsold'}
-      %label.form-check-label{for: "status-unsold"} Show only unsold items
-
 .row
   .col
     %table.table.table-striped.align-top#item-table
@@ -56,7 +41,7 @@
         %tr.text-sm.text-uppercase
           %th
           %th Title
-          %th
+          %th GC
           %th Value
           %th Sold
           %th Description
@@ -71,6 +56,9 @@
                 %i.bi.bi-credit-card-fill.icon-gradient-secondary.text-sm
                 - if item.InGiftCardTree == 1
                   %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
+
+              - if item.InBasket == 1
+                %i.bi.bi-basket-fill.icon-gradient-basket.text-sm
             %td
               - if item.Value == 0
                 ∞
@@ -91,6 +79,6 @@
                 %div
                   %span.category= "[#{category(item.CategoryID)}]"
 
-              - if item.TableID&.include?('Live')
+              - if item.TableID&.include?('LIVE')
                 %div
                   %span.category= "[Live Auction]"

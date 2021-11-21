@@ -40,6 +40,12 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.icon-gradient-basket:before {
+  background: linear-gradient(120deg, rgb(122, 72, 33), rgb(93, 57, 31));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .text-nowrap {
   white-space: nowrap;
 }

@@ -1,12 +1,19 @@
 .row.mt-3.mb-3
   .col
-    %h1 2018 Items
+    %h1 2014 Items
 
 .row.mt-3.mb-3
   .col
     .alert.alert-secondary{role: 'alert'}
-      %h4.text-sm.text-uppercase.text-muted Legend
+      %p
+        This year had no sales data.
 
+      %h4.text-sm.text-uppercase.text-muted.mb-0 Legend
+
+      %div
+        %i.bi.bi-credit-card-fill.icon-gradient-secondary.text-sm
+        &bull;
+        this is a gift card
       %div
         %i.bi.bi-basket-fill.icon-gradient-basket.text-sm
         &bull;
@@ -22,10 +29,7 @@
     %span#visible-item-count= @items.count
     out of
     %span#all-item-count= @items.count
-    items &mdash;
-    %span#sold-item-count= @items.select{ |i| !i.winning_bid.nil? }.length
-    of them sold for
-    %span#sale-value= number_to_currency(@items.sum{ |i| i.winning_bid.nil? ? 0 : i.winning_bid })
+    items
 
 .row
   .col
@@ -36,19 +40,16 @@
           %th Title
           %th
           %th Value
-          %th Sold
           %th Description
 
       %tbody
         - @items.each do |item|
-          %tr{'data-sold-for' => item.winning_bid.nil? ? 0 : item.winning_bid }
+          %tr
             %td.text-muted= item.id
             %td.text-nowrap= item.title
             %td.text-nowrap
               - if item.IsGiftCertificate == 1
                 %i.bi.bi-credit-card-fill.icon-gradient-secondary.text-sm
-                - if item.InGiftCardTree == 1
-                  %i.bi.bi-x-circle-fill.icon-gradient-grey.text-sm
 
               - if item.InBasket == 1
                 %i.bi.bi-basket-fill.icon-gradient-basket.text-sm
@@ -57,7 +58,6 @@
                 ∞
               - else
                 = number_to_currency(item.Value)
-            %td= number_to_currency(item.winning_bid)
             %td.text-sm
               .div
                 %span.donor
@@ -71,7 +71,3 @@
               - if [1,2].include?(item.CategoryID)
                 %div
                   %span.category= "[#{category(item.CategoryID)}]"
-
-              - if item.TableID&.include?('Live')
-                %div
-                  %span.category= "[Live Auction]"
